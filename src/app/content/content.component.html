@@ -1,0 +1,10 @@
+<!-- <div class="card" style="width: 18rem;" *ngFor="let product of products">
+    <div class="card-body">
+        <h5 class="card-title">{{product.title}}</h5>
+        <p class="card-text">{{product.price}}</p>
+        <p class="card-text">{{product.description | mypipe:10}}</p>
+        <a  (click)="addToCart(product.id)" class="btn btn-primary">Buy</a>
+    </div>
+</div> -->
+
+<input type="text" [(ngModel)]="title" (ngModelChange)="seeInConsole()" >
