@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-content',
@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ContentComponent implements OnInit {
 
+  @ViewChild('f') form;
   @Input() products;
   @Output() buyClicked = new EventEmitter();
 
@@ -23,6 +24,14 @@ export class ContentComponent implements OnInit {
 
   seeInConsole() {
     console.log(this.title);
+  }
+
+  show() {
+    console.log(this.form);
+  }
+
+  submit(){
+    console.log(this.form);
   }
 
 }

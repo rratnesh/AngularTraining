@@ -7,4 +7,33 @@
     </div>
 </div> -->
 
-<input type="text" [(ngModel)]="title" (ngModelChange)="seeInConsole()" >
+<!-- <input type="text" [(ngModel)]="title" (ngModelChange)="seeInConsole()" > -->
+<!-- <input type="text" #name (input)="show()" > -->
+<div style="text-align: center;">
+    <div style="width: 50%;">
+        <form #f="ngForm" (ngSubmit)="submit()">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input ngModel name="email" #email="ngModel" type="email" required minlength="4" class="form-control"
+                    id="exampleInputEmail1" aria-describedby="emailHelp">
+                <div class="alert alert-danger" *ngIf="!email.valid && email.touched">
+                    <div *ngIf="email.errors.required">Email is required</div>
+                    <div *ngIf="email.errors.minlength">Minlength must be 4</div>
+                </div>
+            </div>
+            <div class="form-group" ngModelGroup="address" #address="ngModelGroup">
+                <label for="exampleInputEmail1">Address</label>
+                <input ngModel required name="city" class="form-control" placeholder="City">
+                <input ngModel required name="country" class="form-control" placeholder="Country">
+            </div>
+            <div class="alert alert-danger" *ngIf="!address.valid && address.touched">
+                Please complete the address
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input ngModel name="password" type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!f.valid" >Submit</button>
+        </form>
+    </div>
+</div>
