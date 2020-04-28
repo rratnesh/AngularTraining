@@ -1,3 +1,4 @@
 <app-header [cart]="cart"></app-header>
-<app-content [products]="products" (buyClicked)="addToCart($event)"></app-content>
+<!-- <app-content [products]="products" (buyClicked)="addToCart($event)"></app-content> -->
+<router-outlet></router-outlet>
 <app-footer></app-footer>

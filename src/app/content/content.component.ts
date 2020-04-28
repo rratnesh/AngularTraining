@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { MyValidation } from '../validators/custom.validators';
 @Component({
   selector: 'app-content',
@@ -16,18 +16,30 @@ export class ContentComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      email: new FormControl('', [MyValidation.cannotContainSpace]),
-      password: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      address: new FormGroup({
-        city: new FormControl(),
-        country: new FormControl()
+    // this.form = new FormGroup({
+    //   email: new FormControl('', [MyValidation.cannotContainSpace]),
+    //   password: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    //   confirmPassword: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    //   address: new FormGroup({
+    //     city: new FormControl(),
+    //     country: new FormControl()
+    //   }),
+    //   companies: new FormArray([])
+    // })
+
+    this.form = this.fb.group({
+      email: ['', [MyValidation.cannotContainSpace]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(4)]],
+      address: this.fb.group({
+        city: ['', Validators.required],
+        country: ['', Validators.required]
       }),
-      companies: new FormArray([])
-    });
+      companies: this.fb.array([])
+    }, { validators: [ MyValidation.matchPassword ] })
   }
 
   removeEmailValidator() {
@@ -52,7 +64,7 @@ export class ContentComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form.value);
+    console.log(this.form);
   }
 
 }
